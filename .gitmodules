@@ -1,0 +1,3 @@
+[submodule "influxdb-rust"]
+	path = influxdb-rust
+	url = git@github.com:aisrael/influxdb-rust.git

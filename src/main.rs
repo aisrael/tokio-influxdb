@@ -1,3 +1,12 @@
+use futures::future::lazy;
+use influxdb::client::InfluxDbClient;
+use influxdb::query::{InfluxDbQuery, Timestamp};
+
 fn main() {
-    println!("Hello, world!");
+    let client = InfluxDbClient::new("http://localhost:8086", "test");
+
+    let write_query =
+        InfluxDbQuery::write_query(Timestamp::NOW, "weather").add_field("temperature", 82);
+
+    tokio::spawn(client.query(&write_query));
 }
