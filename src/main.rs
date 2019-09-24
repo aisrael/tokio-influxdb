@@ -9,7 +9,8 @@ fn main() {
         InfluxDbQuery::write_query(Timestamp::NOW, "weather").add_field("temperature", 82);
 
     tokio::spawn(
-        lazy(move || client.query(&write_query))
+        client
+            .query(&write_query)
             .map(|x| {
                 println!("{:?}", &x);
             })
